@@ -3,6 +3,9 @@ const app = express();
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const path = require('path');
+
+app.use(express.static(path.join(__dirname, '/public')));
 
 //MongoDb
 mongoose.connect('mongodb://test-user:mario123@ds157762.mlab.com:57762/test-db', { useNewUrlParser: true });
@@ -26,6 +29,10 @@ app.use((req, res, next) => {
 });
 
 //Handling requests
+app.get("/", function(req, res){
+    res.sendFile(__dirname + '/tfg-web/index.html');
+});
+
 app.use('/users', userRoutes);
 
 //If requests were not handled

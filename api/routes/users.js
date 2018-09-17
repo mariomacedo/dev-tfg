@@ -26,6 +26,23 @@ router.get('/', (req, res, next) => {
         });
 });
 
+router.get('/:userId', (req, res, next) => {
+    const id = req.params.userId;
+    User.findById(id)
+        .exec()
+        .then(doc => {
+            console.log('From MongoDb: ' + doc);
+            res.status(200).json(doc);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err,
+                message: err.message
+            });
+        });
+});
+
 router.post('/', (req, res, next) => {
     const user = new User({
         _id: new mongoose.Types.ObjectId(),

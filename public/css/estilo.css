@@ -1,0 +1,11 @@
+:root {
+    --main-color: #212121;
+}
+
+.hidden {
+    display: none!important;
+}
+
+nav {
+    background-color: var(--main-color, black);
+}
